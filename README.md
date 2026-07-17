@@ -1,7 +1,7 @@
 
 
 reproduction of a Chromium renderer crash:
-
+```
   FATAL third_party/blink/renderer/core/dom/document.cc
   Check failed: Lifecycle().StateAllowsTreeMutations().
 
@@ -11,6 +11,7 @@ Symbolized crash stack (Chrome 150 ASAN):
       -> FrameCaret::PaintCaret -> FrameSelection::SelectionHasFocus()
         -> Document::UpdateStyleAndLayout()   // style/layout DURING paint
           -> CHECK(StateAllowsTreeMutations())  // illegal -> renderer abort
+```
 
 Ingredients:
  1. A focused <input> so Blink paints a caret every frame.
